@@ -1,5 +1,6 @@
 pub mod auth;
 pub mod message;
+pub mod error;
 
 use self::message::MessageClient;
 

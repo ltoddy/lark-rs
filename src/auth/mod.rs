@@ -11,7 +11,7 @@ impl AuthClient {
     }
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Serialize)]
 struct AccessTokenRequest {
     app_id: String,
     app_secret: String,
@@ -23,6 +23,7 @@ impl AccessTokenRequest {
     }
 }
 
+#[derive(Debug, Deserialize)]
 struct AccessTokenResponse {
     code: i32,
     msg: String,
@@ -31,7 +32,7 @@ struct AccessTokenResponse {
 }
 
 impl AuthClient {
-    pub fn fetch_access_token(&self, app_id: String, app_secret: String) {
+    pub async fn fetch_access_token(&self, app_id: String, app_secret: String) {
         let url = "https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal";
 
         let request = AccessTokenRequest::new(app_id, app_secret);
