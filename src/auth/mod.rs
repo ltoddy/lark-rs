@@ -6,6 +6,7 @@ use self::app_access_token::{AccessTokenRequest, AccessTokenResponse, TokenAndEx
 use crate::error::Error;
 use crate::result::Result;
 
+#[derive(Clone)]
 pub struct AuthClient {
     httpclient: reqwest::Client,
 }
@@ -35,7 +36,7 @@ impl AuthClient {
             return Ok(tae);
         }
 
-        return Err(Error::LarkBackend(response.code, response.msg));
+        Err(Error::LarkBackend(response.code, response.msg))
     }
 }
 

@@ -1,6 +1,6 @@
 use serde::Serialize;
 
-use super::content::MessageType;
+use super::messages::MessageType;
 
 #[derive(Debug, Serialize)]
 pub struct SendMessageRequest {
