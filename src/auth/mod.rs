@@ -39,23 +39,3 @@ impl AuthClient {
         Err(Error::LarkBackend(response.code, response.msg))
     }
 }
-
-#[cfg(test)]
-pub mod tests {
-    use super::*;
-
-    #[tokio::test]
-    pub async fn fetch_access_token() -> Result<()> {
-        let httpclient = reqwest::Client::new();
-        let app_id = env!("APP_ID");
-        let app_secret = env!("APP_SECRET");
-
-        let auth_client = AuthClient::new(httpclient);
-        let tae = auth_client.fetch_access_token(app_id.into(), app_secret.into()).await?;
-
-        assert_eq!(tae.tenant_access_token.len(), 42);
-        assert!(tae.expire > 0);
-
-        Ok(())
-    }
-}
